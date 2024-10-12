@@ -32,7 +32,7 @@ function MobileNav() {
     <div className="mobileNav hidden">
       <TooltipProvider>
         {NAV_LINKS.map((link) => (
-          <Tooltip>
+          <Tooltip key={link.route}>
             <Link
               href={link.route}
               className={clsx(

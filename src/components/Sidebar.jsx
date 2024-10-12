@@ -31,7 +31,7 @@ const ICONS = {
 
 function Sidebar() {
   return (
-    <div className="w-full h-full flex flex-col justify-center p-4 max-lg:items-center max-md:px-1">
+    <div className="w-full h-full flex flex-col justify-center p-2 max-lg:items-center max-md:px-1">
       <Link
         href="/"
         className="logo flex-none flex justify-center items-center"
@@ -50,7 +50,7 @@ function Sidebar() {
         <MobileNav />
       </div>
       <Separator className="my-4" />
-      <div className="flex-none flex flex-col justify-center px-4">
+      <div className="flex-none flex flex-col justify-center max-lg:items-center">
         <IsUser />
         <ModeToggle />
       </div>
@@ -64,6 +64,7 @@ export const DesktopNav = () => {
     <div className="max-lg:hidden">
       {NAV_LINKS.map((link) => (
         <Link
+          key={link.route}
           href={link.route}
           className={clsx(
             path === link.route ? "bg-[#E4E4E7] dark:bg-[#27272A]" : "",

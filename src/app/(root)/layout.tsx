@@ -20,7 +20,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={(inter.className, "w-full h-screen flex ")}>
+        <body
+          className={
+            (inter.className,
+            "w-full max-w-[1440px] h-screen flex mx-auto max-md:overflow-hidden")
+          }
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -30,7 +35,9 @@ export default function RootLayout({
             <aside className="w-[25%] border-r-2 max-lg:w-[15%]">
               <Sidebar />
             </aside>
-            <main className="w-[75%] p-4 max-lg:w-[85%]">{children}</main>
+            <main className="w-[75%] max-lg:w-[85%] px-4 overflow-scroll">
+              {children}
+            </main>
           </ThemeProvider>
         </body>
       </html>

@@ -13,3 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+enum FOOD_TYPE {
+  Flakes
+  Pellets
+  Frozen
+  Live 
+  Dried
+}
+
