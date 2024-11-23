@@ -2,11 +2,19 @@ import mongoose from "mongoose";
 
 const storeSchema = new mongoose.Schema(
   {
-    store: {
+    storeName: {
       type: String,
     },
-    owner: {
+    storeLogo: {
       type: String,
+    },
+    ownerName: {
+      type: String,
+      required: true,
+    },
+    clerkId: {
+      type: String,
+      required: true,
     },
     description: {
       type: String,
@@ -19,8 +27,6 @@ const storeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    prouducts: [],
-    orders: [],
   },
   {
     timestamps: true,

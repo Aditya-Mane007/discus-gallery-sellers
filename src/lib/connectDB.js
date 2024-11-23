@@ -1,5 +1,6 @@
 "use server";
 import mongoose from "mongoose";
+import colors from "colors";
 
 let isConnected = false;
 
@@ -9,10 +10,7 @@ const connectDb = async () => {
     return;
   }
   try {
-    const conn = await mongoose.connect(process.env.NEXT_PUBLIC_DATABASE_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const conn = await mongoose.connect(process.env.NEXT_PUBLIC_DATABASE_URL);
     if (conn) {
       console.log(
         `MongoDB is Connected ${conn.connection.host}`.blue.underline

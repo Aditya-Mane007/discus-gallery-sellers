@@ -8,5 +8,5 @@ export default function Example() {
     return null;
   }
 
-  return <div>Hello, {user.firstName} welcome to Clerk</div>;
+  return user.id;
 }

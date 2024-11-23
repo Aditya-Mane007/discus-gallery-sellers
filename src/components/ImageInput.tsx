@@ -35,13 +35,9 @@ const MAX_IMAGES = 5;
 
 export default function ImageInput({ form }: { form: any }) {
   const [images, setImages] = useState<ImageFile[]>([]);
+
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-
-  // console.log(fileInputRef);
-
-  // console.log(images);
 
   const handleFileChange = (files: FileList | null) => {
     if (files && images.length < MAX_IMAGES) {
@@ -51,6 +47,7 @@ export default function ImageInput({ form }: { form: any }) {
         file,
         preview: URL.createObjectURL(file),
       }));
+
       setImages([...images, ...newImages]);
       form.setValue("images", [...form.getValues("images"), ...filesToAdd]);
     }

@@ -27,6 +27,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Textarea } from "@/components/ui/textarea";
+import toast from "react-hot-toast";
+import { rejects } from "assert";
 
 const formSchema = z.object({
   name: z.string().min(4, {
@@ -37,7 +39,7 @@ const formSchema = z.object({
   }),
   images: z
     .array(z.instanceof(File))
-    .min(1, {
+    .min(5, {
       message: "At least 5 images are required.",
     })
     .max(5, {
@@ -78,18 +80,6 @@ function page() {
     name: "variants",
   });
 
-  fields.forEach((field) => {
-    console.log(field);
-  });
-
-  const formDataJSON = {
-    images: form.getValues("images"),
-    name: form.getValues("name"),
-    description: form.getValues("description"),
-    category: form.getValues("category"),
-    variants: form.getValues("variants"),
-  };
-
   const handleAddVariant = () => {
     if (Number(variantInput.quantity) > 0 && Number(variantInput.price) > 0) {
       const varianstsData = {
@@ -101,18 +91,16 @@ function page() {
     }
   };
 
-  // console.log(formDataJSON);
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // if (values.variants.length < 1) {
-    //   alert("Please add variants");
-    // } else {
-    console.log("Form Values: ", values);
-    console.log("Validation Errors: ", form.formState.errors); // Log validation errors
-    console.log(formDataJSON);
-    console.log("Submitting form..."); // This should log when submitting
-    console.log(values); // Check if the values are being populated correctly
-    // }
-  }
+  // const convertTobase64 = (file: File) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     return reader.result;
+  //   };
+  // };
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {}
+
   return (
     <div className="addProductForm w-full min-h-screen max-md:w-[100%]">
       <div className="h-auto max-md:h-auto ">
@@ -233,19 +221,6 @@ function page() {
           </form>
         </Form>
       </div>
-      {/* <div className="div4 w-full px-3">
-        <VariantInput
-          variantsData={form.getValues("variants")}
-          append={append}
-          remove={remove}
-        />
-      </div> */}
-      {/* <Button
-        className="div5 mx-3 w-auto max-md:w-full h-12 mt-0 max-md:mt-8 bg-[#E4E4E7] dark:bg-[#27272A]"
-        onClick={() => submitRef.current?.click()}
-      >
-        Add Product
-      </Button> */}
     </div>
   );
 }

@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import colors from "colors";
+import { Toaster } from "react-hot-toast";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import Sidebar from "@/components/Sidebar";
 import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
+
+import ReduxStoreProvider from "@/components/reduxStoreProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +27,7 @@ export default function RootLayout({
         <body
           className={
             (inter.className,
-            "w-full max-w-[1440px] h-screen flex mx-auto max-md:overflow-hidden")
+            "w-full max-w-[1440px] h-[100dvh] flex mx-auto max-md:overflow-hidden")
           }
         >
           <ThemeProvider
@@ -33,12 +36,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <aside className="w-[25%] border-r-2 max-lg:w-[15%]">
-              <Sidebar />
-            </aside>
-            <main className="w-[75%] max-lg:w-[85%] px-4 overflow-scroll">
-              {children}
-            </main>
+            <ReduxStoreProvider>
+              <aside className="w-[25%] border-r-2 max-lg:w-[15%]">
+                <Sidebar />
+              </aside>
+              <main className="w-[75%] max-lg:w-[85%] px-2 overflow-scroll">
+                {children}
+              </main>
+              <Toaster />
+            </ReduxStoreProvider>
           </ThemeProvider>
         </body>
       </html>
